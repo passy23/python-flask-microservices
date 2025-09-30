@@ -80,7 +80,7 @@ pipeline {
                             -o SendEnv=IMAGE_NAME \
                             -o SendEnv=IMAGE_TAG \
                             -o SendEnv=CONTAINER_NAME \
-                            -c "$command1 && $command2 && $command3"
+                            -C "$command1 && $command2 && $command3"
                             
                             
 
