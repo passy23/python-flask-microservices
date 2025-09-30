@@ -36,6 +36,20 @@ pipeline {
             }
         }
 
+
+        stage ('Push Image') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'githup-credentials', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USER')]) 
+                    sh '''
+                        docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${DOCKER_HUB_USER}/${IMAGE_NAME}:${IMAGE_TAG}
+                        docker login -u D$OCKER_USER -p $DOCKER_PASSWORD
+                        docker push ${DOCKER_HUB_USER}/${IMAGE_NAME}:${IMAGE_TAG}
+                    '''
+                }
+            }
+        }
+
     
     }
 }
