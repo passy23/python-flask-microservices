@@ -10,7 +10,7 @@ pipeline {
     }
 
     stages {
-        stage {
+        stage ('Build image'){
             script {
                 sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} frontend/Dockerfile'
             }
