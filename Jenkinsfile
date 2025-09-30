@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'IMAGE_NAME', defaultValue: 'frontent', description: 'this the name of my docker image for frontend application')
+        string(name: 'IMAGE_NAME', defaultValue: 'frontend', description: 'this the name of my docker image for frontend application')
         string(name: 'IMAGE_TAG', defaultValue: 'latest', description: '')
         string(name: 'GITHUB_USER', defaultValue: 'passy23', description: '')
         string(name: 'CONTAINER_NAME', defaultValue: 'frontendapp', description: '')
@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        docker rm -f frontentapp
+                        docker rm -f frontendapp
                         echo "Launch test container"
                         docker run -d -p 5000:5000 --name ${CONTAINER_NAME} ${IMAGE_NAME}:${IMAGE_TAG}
                         sleep 5
