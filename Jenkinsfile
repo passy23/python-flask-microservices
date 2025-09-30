@@ -75,7 +75,7 @@ pipeline {
                         [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
                         ssh-keyscan -t rsa,dsa 192.168.1.19 >> ~/.ssh/known_hosts
                         
-                        ssh ssh passy@192.168.1.19 \
+                        ssh passy@192.168.1.19 \
                             -o SendEnv=DOCKER_HUB_USER \
                             -o SendEnv=IMAGE_NAME \
                             -o SendEnv=IMAGE_TAG \
