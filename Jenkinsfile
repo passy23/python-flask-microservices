@@ -59,6 +59,37 @@ pipeline {
             }
         }
 
+        stage ('Deploy') {
+            environment {
+                DOCKER_HUB_USER="pascaline2019"
+                IMAGE_NAME="frontend"
+                IMAGE_TAG="latest"
+                CONTAINER_NAME="frontendapp"
+            }
+            steps {
+                    sshagent(credentials: ['ssh-cred']) {
+                    sh '''
+                        command1="docker pull $DOCKER_HUB_USER/$IMAGE_NAME:$IMAGE_TAG"
+                        command2="docker rm -f $CONTAINER_NAME"
+                        command3="docker run -d -p 5000:5000 --name $CONTAINER_NAME $IMAGE_NAME:$IMAGE_TAG"
+                        [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
+                        ssh-keyscan -t rsa,dsa 192.168.1.19 >> ~/.ssh/known_hosts
+                        
+                        ssh ssh passy@192.168.1.19 \
+                            -o SendEnv=DOCKER_HUB_USER \
+                            -o SendEnv=IMAGE_NAME \
+                            -o SendEnv=IMAGE_TAG \
+                            -o SendEnv=CONTAINER_NAME \
+                            -c "$command1 && $command2 && $command3"
+                            
+                            
+
+                    '''
+                    }
+                }
+            }
+        
+
     
     }
 }
