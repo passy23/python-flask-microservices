@@ -1,5 +1,5 @@
-pipeline{
-    agent none
+pipeline {
+    agent any
 
     parameters {
         string(name: 'IMAGE_NAME', defaultValue: 'frontent', description: 'this the name of my docker image for frontend application')
@@ -12,7 +12,7 @@ pipeline{
     stages {
         stage {
             script {
-                sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
+                sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} frontend/Dockerfile'
             }
         }
     }
