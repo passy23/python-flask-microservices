@@ -6,6 +6,7 @@ pipeline {
         string(name: 'IMAGE_TAG', defaultValue: 'latest', description: '')
         string(name: 'GITHUB_USER', defaultValue: 'passy23', description: '')
         string(name: 'CONTAINER_NAME', defaultValue: 'frontendapp', description: '')
+        string(name: 'DOCKER_HUB_USER', defaultValue: 'pascaline2019', description: '')
         
     }
 
@@ -48,7 +49,7 @@ pipeline {
                         )]) {
                             sh '''
                                 docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${DOCKER_HUB_USER}/${IMAGE_NAME}:${IMAGE_TAG}
-                                docker login -u D$OCKER_USER -p $DOCKER_PASSWORD
+                                docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
                                 docker push ${DOCKER_HUB_USER}/${IMAGE_NAME}:${IMAGE_TAG}
                             '''
 
