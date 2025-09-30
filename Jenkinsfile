@@ -22,6 +22,7 @@ pipeline {
             steps {
                 script {
                     sh '''
+                        docker rm -f ${CONTENER_NAME}
                         echo "Launch test container"
                         docker run -d -p 5000:5000 --name ${CONTENER_NAME} ${IMAGE_NAME}:${IMAGE_TAG}
                         sleep 5
