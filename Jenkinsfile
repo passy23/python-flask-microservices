@@ -71,7 +71,7 @@ pipeline {
                     sh '''
                         command1="docker pull $DOCKER_HUB_USER/$IMAGE_NAME:$IMAGE_TAG"
                         command2="docker rm -f $CONTAINER_NAME"
-                        command3="docker run -d -p 5000:5000 --name $CONTAINER_NAME $IMAGE_NAME:$IMAGE_TAG"
+                        command3="docker run -d -p 5000:5000 --name $CONTAINER_NAME $DOCKER_HUB_USER/$IMAGE_NAME:$IMAGE_TAG"
                         [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
                         ssh-keyscan -t rsa,dsa 192.168.1.19 >> ~/.ssh/known_hosts
                         
